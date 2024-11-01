@@ -15,3 +15,8 @@
 - docker-compose.yml: Файл для запуска приложения с Docker Compose.
 - Dockerfile: Файл для создания Docker-образа приложения.
 - poetry.lock: Файл, содержащий список зависимостей и их версии.
+
+
+Для запуска всего приложения fastapi через poetry нужно использовать команду:
+
+`poetry run python3 app/main.py`
