@@ -9,5 +9,3 @@ class ABCRepository(ABC):
     @abstractmethod
     async def find():
         raise NotImplementedError
-    
-
