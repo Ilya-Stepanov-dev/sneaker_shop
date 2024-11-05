@@ -3,6 +3,7 @@ from pydantic import BaseModel, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+
 class UvicornConfig(BaseModel):
     host: str = 'host'
     port: int = 0000
@@ -11,10 +12,6 @@ class UvicornConfig(BaseModel):
 
 class ApiConfig(BaseModel):
     prefix: str = '/vvv'
-
-    model_config = SettingsConfigDict(
-        env_file = ".env"
-    )
     
 
 class DataBaseConfig(BaseModel):
@@ -26,10 +23,20 @@ class DataBaseConfig(BaseModel):
     name: str = 'name'
     engine: str = 'engine'
 
-    def get_url(self):
-        url = f'{self.name}+{self.engine}://{self.user}:{self.passwd}@{self.host}:{self.port}/{self.name_db}'
-        return url
+    @property
+    def url(self):
+        return f'{self.name}+{self.engine}://{self.user}:{self.passwd}@{self.host}:{self.port}/{self.name_db}'
 
+    # url: str = f'{name}+{engine}://{user}:{passwd}@{host}:{port}/{name_db}'
+
+    # def get_url(self):
+    #     url = f'{self.name}+{self.engine}://{self.user}:{self.passwd}@{self.host}:{self.port}/{self.name_db}'
+    #     return url
+
+class SQLAlchemyConfig(BaseModel):
+    echo: bool = False,
+    pool_size: int = 5,
+    max_overflow: int = 10,
 
 
 class Settings(BaseSettings):
@@ -43,5 +50,8 @@ class Settings(BaseSettings):
     uvicorn: UvicornConfig = UvicornConfig()
     api: ApiConfig = ApiConfig()
     db: DataBaseConfig = DataBaseConfig()
+    orm: SQLAlchemyConfig = SQLAlchemyConfig()
 
 settings = Settings()
+print(settings.model_dump())
+print(settings.db.url)
