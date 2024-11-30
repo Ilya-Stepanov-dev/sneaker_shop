@@ -1,4 +1,5 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
 from config import settings
 
@@ -33,6 +34,7 @@ class DataBaseHelper:
             yield session
     
 
+Base = declarative_base()
 
 database_helper = DataBaseHelper(
     url=settings.db.url,
