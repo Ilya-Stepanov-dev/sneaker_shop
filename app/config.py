@@ -3,7 +3,6 @@ from pydantic import BaseModel, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-
 class UvicornConfig(BaseModel):
     host: str = 'host'
     port: int = 0000
@@ -15,7 +14,7 @@ class ApiConfig(BaseModel):
     
 
 class DataBaseConfig(BaseModel):
-    host: str = 'host'
+    host: str = 'localhost'
     port: int = 0000
     user: str = 'db_user'
     passwd: str = 'pass'
@@ -27,11 +26,6 @@ class DataBaseConfig(BaseModel):
     def url(self):
         return f'{self.name}+{self.engine}://{self.user}:{self.passwd}@{self.host}:{self.port}/{self.name_db}'
 
-    # url: str = f'{name}+{engine}://{user}:{passwd}@{host}:{port}/{name_db}'
-
-    # def get_url(self):
-    #     url = f'{self.name}+{self.engine}://{self.user}:{self.passwd}@{self.host}:{self.port}/{self.name_db}'
-    #     return url
 
 class SQLAlchemyConfig(BaseModel):
     echo: bool = False,
