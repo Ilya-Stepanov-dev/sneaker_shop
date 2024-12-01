@@ -12,7 +12,7 @@ sys.path.append(os.path.join(sys.path[0], 'app'))
 from app.config import settings
 
 from app.db_helper import Base
-from app.models.user import *
+from app.models import *
 
 
 
