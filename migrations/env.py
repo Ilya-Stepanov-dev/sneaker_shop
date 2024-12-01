@@ -12,8 +12,7 @@ sys.path.append(os.path.join(sys.path[0], 'app'))
 from app.config import settings
 
 from app.db_helper import Base
-from app.models import *
-
+from app.models.user import *
 
 
 # this is the Alembic Config object, which provides
@@ -21,7 +20,7 @@ from app.models import *
 config = context.config
 section = config.config_ini_section
 
-config.set_section_option(section, "sqlalchemy.url", settings.db.url)
+config.set_section_option(section, "POSTGRES_URL", settings.db.url)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

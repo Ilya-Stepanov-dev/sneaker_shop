@@ -1,7 +1,10 @@
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 from config import settings
+
+Base = declarative_base()
 
 class DataBaseHelper:
     def __init__(
@@ -23,8 +26,7 @@ class DataBaseHelper:
             autoflush=False,
             expire_on_commit=False,
         )
-    
-
+        
     async def dispose(self):
         await self.engine.dispose()
 
@@ -33,9 +35,6 @@ class DataBaseHelper:
         async with self.session_factory() as session:
             yield session
     
-
-Base = declarative_base()
-
 database_helper = DataBaseHelper(
     url=settings.db.url,
     echo=settings.orm.echo,

@@ -3,7 +3,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
 from .base import BaseClass
 
-class TelegramUser(Base, BaseClass):
+class TelegramUser(Base):
     __tablename__ = 'telegram_users'
     
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -12,7 +12,7 @@ class TelegramUser(Base, BaseClass):
     last_activity: Mapped[str] = mapped_column(nullable=False)
 
 
-class User(Base, BaseClass):
+class User(Base):
     __tablename__ = 'users'
     
     id: Mapped[int] = mapped_column(primary_key=True)
