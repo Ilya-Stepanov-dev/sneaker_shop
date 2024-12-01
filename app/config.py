@@ -47,5 +47,3 @@ class Settings(BaseSettings):
     orm: SQLAlchemyConfig = SQLAlchemyConfig()
 
 settings = Settings()
-print(settings.model_dump())
-print(settings.db.url)
